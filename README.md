@@ -1,0 +1,1 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/te75luq2liknoomr?svg=true)](https://ci.appveyor.com/project/agasferon/aqa-task-6-bdd)
