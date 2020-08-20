@@ -36,4 +36,12 @@ public class DataHelper {
     return "4276 4000 0000 6666";
   }
 
+  public static String getExpectedErorNotificationLimit(){
+    return "Недостаточно средств на карте!";
+  }
+
+  public static String getExpectedErorNotificationCardNumber(){
+    return "Неверный номер карты!";
+  }
+
 }

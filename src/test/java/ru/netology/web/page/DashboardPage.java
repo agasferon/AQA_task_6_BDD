@@ -5,7 +5,6 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.val;
 
-import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
@@ -17,46 +16,20 @@ public class DashboardPage {
   private final String balanceFinish = " р.";
 
   private SelenideElement heading = $("[data-test-id=dashboard]");
-  private SelenideElement fieldAmount = $("[data-test-id=amount] input");
-  private SelenideElement fieldCardFrom = $("[data-test-id=from] input");
-  private SelenideElement fieldCardTo = $("[data-test-id=to] input");
-  private SelenideElement buttonActionTransfer = $("[data-test-id=action-transfer]");
   private SelenideElement buttonActionReload = $("[data-test-id=action-reload]");
-  private SelenideElement errorNotification = $("[data-test-id='error-notification'] .notification__content");
 
   public DashboardPage() {
     heading.shouldBe(visible);
   }
 
-  private void openTransaction(String fourDigitCardNumber) {
+  public void openTransaction(String fourDigitCardNumber) {
     cards.findBy(Condition.text(fourDigitCardNumber)).$(withText("Пополнить")).click();
     $(withText("Пополнение карты")).shouldBe(visible);
-  }
-
-  private void setAmount(int amount) {
-    fieldAmount.clear();
-    fieldAmount.setValue(String.valueOf(amount));
-  }
-
-  private void setCardNumberFrom(String cardNumber) {
-    fieldCardFrom.setValue(cardNumber);
-  }
-
-  private void clickTransfer() {
-    fieldCardTo.shouldBe(disabled);
-    buttonActionTransfer.click();
   }
 
   public void actionReload() {
     heading.waitUntil(Condition.visible, 15000);
     buttonActionReload.click();
-  }
-
-  public void actionDeposit(String fourDigitCardNumberTo, String cardNumberFrom, int amount) {
-    openTransaction(fourDigitCardNumberTo);
-    setAmount(amount);
-    setCardNumberFrom(cardNumberFrom);
-    clickTransfer();
   }
 
   private int extractBalance(String text) {
@@ -76,8 +49,4 @@ public class DashboardPage {
     return extractBalance(text);
   }
 
-  public String showErrorNotification() {
-    errorNotification.shouldBe(visible);
-    return errorNotification.getText();
-  }
 }
