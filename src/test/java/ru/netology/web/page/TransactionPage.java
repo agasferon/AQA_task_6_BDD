@@ -32,9 +32,8 @@ public class TransactionPage {
         buttonActionTransfer.click();
     }
 
-    public String showErrorNotification() {
+    public void showErrorNotification() {
         errorNotification.shouldBe(visible);
-        return errorNotification.getText();
     }
 
     public void actionDeposit(String fourDigitCardNumberTo, String cardNumberFrom, int amount) {
